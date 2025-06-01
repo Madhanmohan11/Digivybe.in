@@ -1,5 +1,5 @@
 Project info
-URL: https://digivybe.dev/projects/d520a618-17c6-4770-83ad-419a27fe720c
+URL: https://digivybe.netlify.app/
 
 How can I edit this code?
 There are several ways of editing your application.
