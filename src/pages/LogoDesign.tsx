@@ -1,14 +1,27 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Palette, Eye, Layers, Download, Star, ArrowRight, ExternalLink } from 'lucide-react'; // Ensure ExternalLink is imported
+import { ArrowLeft, Check, Palette, Eye, Layers, Download, Star, ArrowRight, ExternalLink } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 const LogoDesign = () => {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
   const [hoveredPackage, setHoveredPackage] = useState<string | null>(null);
   const [showContactForm, setShowContactForm] = useState(false);
+
+   
+  const readyToCreateBrandRef = useRef<HTMLDivElement>(null);
+
+  
+  const getFixedHeaderHeight = () => {
+    const headerElement = document.getElementById('digivybe-header');
+    if (headerElement) {
+      return headerElement.offsetHeight;
+    }
+    return 80;  
+  };
+  
 
   const services = [
     { icon: <Palette className="w-6 h-6" />, title: "Brand Identity", description: "Complete brand identity development and guidelines" },
@@ -21,8 +34,8 @@ const LogoDesign = () => {
     {
       id: "basic",
       name: "Basic Logo",
-      price: "₹12,000",
-      originalPrice: "₹18,000",
+      price: "₹999",
+      originalPrice: "From",
       features: ["3 logo concepts", "2 revisions", "High-res files", "Basic brand colors", "Email support", "Logo Guidelines"],
       gradient: "from-orange-500 to-red-500",
       badge: "Perfect for Startups",
@@ -31,8 +44,8 @@ const LogoDesign = () => {
     {
       id: "professional",
       name: "Professional Logo",
-      price: "₹30,000",
-      originalPrice: "₹45,000",
+      price: "₹2,999",
+      originalPrice: "From",
       features: ["5 logo concepts", "Unlimited revisions", "Vector files", "Brand guidelines", "Social media kit", "Priority support", "Business Card Design", "Letterhead Design"],
       gradient: "from-red-500 to-pink-500",
       badge: "Most Popular",
@@ -41,8 +54,8 @@ const LogoDesign = () => {
     {
       id: "complete",
       name: "Complete Branding",
-      price: "₹60,000",
-      originalPrice: "₹85,000",
+      price: "₹5,999",
+      originalPrice: "From",
       features: ["10 logo concepts", "Complete brand identity", "Business card design", "Letterhead design", "Brand style guide", "1-on-1 consultation", "Brand Mockups", "Website Favicon"],
       gradient: "from-pink-500 to-purple-500",
       badge: "Premium Brand Identity",
@@ -61,16 +74,35 @@ const LogoDesign = () => {
     }
   };
 
-  // Function to scroll to the pricing section
+  
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing-section');
     if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: 'smooth' });
+      const headerHeight = getFixedHeaderHeight();
+      const elementPosition = pricingSection.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight - 20;  
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
-
+ 
+  useEffect(() => {
+    if (selectedPackage && readyToCreateBrandRef.current) {
+      const headerHeight = getFixedHeaderHeight();
+      const elementPosition = readyToCreateBrandRef.current.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight - 20;  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }, [selectedPackage]);   
   return (
     <div className="min-h-screen pt-20">
+
       {/* Back Button */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link to="/services" className="inline-flex items-center text-violet-600 hover:text-violet-700 transition-colors">
@@ -94,7 +126,7 @@ const LogoDesign = () => {
                 <Button
                   size="lg"
                   className="bg-white text-orange-600 hover:bg-gray-100 w-full sm:w-auto"
-                  onClick={scrollToPricing}
+                  onClick={scrollToPricing}  
                 >
                   Start Design
                 </Button>
@@ -181,8 +213,8 @@ const LogoDesign = () => {
                   <h3 className="text-2xl font-bold text-center mb-2">{pkg.name}</h3>
                   <div className="text-center mb-6">
                     <div className="flex items-center justify-center gap-2">
-                      <span className="text-lg text-gray-400 line-through">{pkg.originalPrice}</span>
-                      <span className="text-4xl font-bold text-green-600">{pkg.price}</span>
+                      <span className="text-2xl font-bold text-red-600">{pkg.originalPrice}</span>   {/* text-lg text-gray-400 line-through */}
+                      <span className="text-3xl font-bold text-green-600">{pkg.price}</span>
                     </div>
                     <span className="text-gray-600 text-sm">Per project</span>
                   </div>
@@ -200,6 +232,8 @@ const LogoDesign = () => {
                         ? 'bg-green-600 hover:bg-green-700'
                         : `bg-gradient-to-r ${pkg.gradient} hover:opacity-90`
                     }`}
+                    
+                    onClick={() => handlePackageSelect(pkg.id)}  
                   >
                     {selectedPackage === pkg.id ? (
                       <>
@@ -219,7 +253,10 @@ const LogoDesign = () => {
           </div>
 
           {selectedPackage && (
-            <div className="mt-12 p-8 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl border-2 border-orange-200 text-center animate-fade-in">
+            <div
+              ref={readyToCreateBrandRef}  
+              className="mt-12 p-8 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl border-2 border-orange-200 text-center animate-fade-in"
+            >
               <h3 className="text-2xl font-bold mb-4 text-orange-800">Ready to Create Your Brand?</h3>
               <p className="text-gray-700 mb-6">
                 You've selected the **{packages.find(p => p.id === selectedPackage)?.name}** package.
@@ -235,7 +272,7 @@ const LogoDesign = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section (The static "Ready to Create Your Brand?" section at the bottom) */}
       <section className="py-20 bg-gradient-to-r from-orange-600 to-red-600">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -249,7 +286,7 @@ const LogoDesign = () => {
             <Button
               size="lg"
               variant="outline"
-              className="bg-white text-orange-600 hover:bg-gray-100 w-full sm:w-auto"  
+              className="bg-white text-orange-600 hover:bg-gray-100 w-full sm:w-auto"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
               View Our Work

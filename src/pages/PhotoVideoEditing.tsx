@@ -1,14 +1,34 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Camera, Video, Palette, Sparkles, Star, ArrowRight, ExternalLink } from 'lucide-react';
+import {
+  ArrowLeft,
+  Check,
+  Camera,
+  Video,
+  Palette,
+  Sparkles,
+  Star,
+  ArrowRight,
+  ExternalLink
+} from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 const PhotoVideoEditing = () => {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
   const [hoveredPackage, setHoveredPackage] = useState<string | null>(null);
   const [showContactForm, setShowContactForm] = useState(false);
+
+  const selectedSectionRef = useRef<HTMLDivElement | null>(null);
+
+ useEffect(() => {
+  if (selectedPackage && selectedSectionRef.current) {
+    const topOffset = selectedSectionRef.current.getBoundingClientRect().top + window.scrollY - 100;  
+    window.scrollTo({ top: topOffset, behavior: 'smooth' });
+  }
+}, [selectedPackage]);
+
 
   const services = [
     { icon: <Camera className="w-6 h-6" />, title: "Photo Editing", description: "Professional photo retouching and enhancement" },
@@ -21,8 +41,8 @@ const PhotoVideoEditing = () => {
     {
       id: "basic",
       name: "Basic",
-      price: "₹8,000",
-      originalPrice: "₹12,000",
+      // price: "₹8,000",
+      // originalPrice: "₹12,000",
       features: ["5 photos or 1 video", "Basic editing", "Color correction", "24-hour delivery", "2 revisions", "HD Quality"],
       gradient: "from-purple-500 to-pink-500",
       badge: "Perfect for Small Projects",
@@ -31,8 +51,8 @@ const PhotoVideoEditing = () => {
     {
       id: "professional",
       name: "Professional",
-      price: "₹25,000",
-      originalPrice: "₹35,000",
+      // price: "₹25,000",
+      // originalPrice: "₹35,000",
       features: ["20 photos or 5 videos", "Advanced editing", "Creative effects", "12-hour delivery", "Unlimited revisions", "4K Quality", "Background Removal", "Social Media Formats"],
       gradient: "from-pink-500 to-rose-500",
       badge: "Most Popular",
@@ -41,8 +61,8 @@ const PhotoVideoEditing = () => {
     {
       id: "premium",
       name: "Premium",
-      price: "₹50,000",
-      originalPrice: "₹70,000",
+      // price: "₹50,000",
+      // originalPrice: "₹70,000",
       features: ["50 photos or 10 videos", "Expert editing", "Custom effects", "6-hour delivery", "Priority support", "8K Quality", "Animation & Motion Graphics", "Brand Integration"],
       gradient: "from-rose-500 to-red-500",
       badge: "Professional Grade",
@@ -61,7 +81,6 @@ const PhotoVideoEditing = () => {
     }
   };
 
-  // Function to scroll to the pricing section
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing-section');
     if (pricingSection) {
@@ -71,7 +90,6 @@ const PhotoVideoEditing = () => {
 
   return (
     <div className="min-h-screen pt-20">
-      {/* Back Button */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link to="/services" className="inline-flex items-center text-violet-600 hover:text-violet-700 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -91,7 +109,6 @@ const PhotoVideoEditing = () => {
                 Transform your visual content with professional photo and video editing services that bring your creative vision to life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                {/* Changed Link to a Button with onClick for smooth scroll, added responsive width */}
                 <Button 
                   size="lg" 
                   className="bg-white text-purple-600 hover:bg-gray-100 w-full sm:w-auto"
@@ -143,7 +160,7 @@ const PhotoVideoEditing = () => {
         </div>
       </section>
 
-      {/* Interactive Pricing Section - ADDED ID HERE */}
+      {/* Pricing Section */}
       <section id="pricing-section" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -166,13 +183,12 @@ const PhotoVideoEditing = () => {
                 onMouseEnter={() => setHoveredPackage(pkg.id)}
                 onMouseLeave={() => setHoveredPackage(null)}
               >
-                {pkg.popular && (
+                {pkg.popular ? (
                   <div className="absolute top-0 left-0 right-0 bg-purple-600 text-white text-center py-2 text-sm font-medium">
                     <Star className="w-4 h-4 inline mr-1" />
                     {pkg.badge}
                   </div>
-                )}
-                {!pkg.popular && (
+                ) : (
                   <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r ${pkg.gradient}`}>
                     {pkg.badge}
                   </div>
@@ -187,7 +203,7 @@ const PhotoVideoEditing = () => {
                       <span className="text-lg text-gray-400 line-through">{pkg.originalPrice}</span>
                       <span className="text-4xl font-bold text-green-600">{pkg.price}</span>
                     </div>
-                    <span className="text-gray-600 text-sm">Per package</span>
+                    <span className="text-gray-600 text-sm">Contact the Team</span>
                   </div>
                   <ul className="space-y-3 mb-8">
                     {pkg.features.map((feature, idx) => (
@@ -220,12 +236,15 @@ const PhotoVideoEditing = () => {
               </Card>
             ))}
           </div>
-          
+
           {selectedPackage && (
-            <div className="mt-12 p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl border-2 border-purple-200 text-center animate-fade-in">
+            <div
+              ref={selectedSectionRef}
+              className="mt-12 p-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl border-2 border-purple-200 text-center animate-fade-in"
+            >
               <h3 className="text-2xl font-bold mb-4 text-purple-800">Ready to Transform Your Content?</h3>
               <p className="text-gray-700 mb-6">
-                You've selected the **{packages.find(p => p.id === selectedPackage)?.name}** package. 
+                You've selected the <strong>{packages.find(p => p.id === selectedPackage)?.name}</strong> package. 
                 Let's bring your creative vision to life!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -248,7 +267,6 @@ const PhotoVideoEditing = () => {
             Let's bring your photos and videos to life with professional editing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {/* Added responsive width to View Our Work button */}
             <Link to="/portfolio">
               <Button 
                 size="lg" 

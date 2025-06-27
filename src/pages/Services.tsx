@@ -33,14 +33,14 @@ const Services = () => {
       gradient: "from-violet-600 to-purple-600",
       route: "/services/web-development"
     },
-    {
-      title: "E-Commerce Development",
-      description: "Complete online stores with payment integration, inventory management, and user-friendly shopping experiences that drive sales and customer satisfaction.",
-      icon: "🛒",
-      features: ["Payment Integration", "Inventory Management", "Shopping Cart", "Order Tracking"],
-      gradient: "from-blue-600 to-cyan-600",
-      route: "/services/ecommerce-development"
-    },
+    // {
+    //   title: "E-Commerce Development",
+    //   description: "Complete online stores with payment integration, inventory management, and user-friendly shopping experiences that drive sales and customer satisfaction.",
+    //   icon: "🛒",
+    //   features: ["Payment Integration", "Inventory Management", "Shopping Cart", "Order Tracking"],
+    //   gradient: "from-blue-600 to-cyan-600",
+    //   route: "/services/ecommerce-development"
+    // },
     {
       title: "Photos and Video Editing",
       description: "Professional photo and video editing services that bring your visual content to life with stunning effects, color correction, and creative enhancements.",
@@ -65,14 +65,14 @@ const Services = () => {
       gradient: "from-orange-600 to-red-600",
       route: "/services/logo-design"
     },
-    {
-      title: "WordPress Development",
-      description: "Custom WordPress websites with themes, plugins, and functionality tailored to your specific business needs and requirements.",
-      icon: "📝",
-      features: ["Custom Themes", "Plugin Development", "Performance Optimization", "Security"],
-      gradient: "from-indigo-600 to-blue-600",
-      route: "/services/wordpress-development"
-    }
+    // {
+    //   title: "WordPress Development",
+    //   description: "Custom WordPress websites with themes, plugins, and functionality tailored to your specific business needs and requirements.",
+    //   icon: "📝",
+    //   features: ["Custom Themes", "Plugin Development", "Performance Optimization", "Security"],
+    //   gradient: "from-indigo-600 to-blue-600",
+    //   route: "/services/wordpress-development"
+    // }
   ];
 
   return (
@@ -92,7 +92,7 @@ const Services = () => {
       {/* Services Grid */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {services.map((service, index) => (
               <Card 
                 key={service.title}

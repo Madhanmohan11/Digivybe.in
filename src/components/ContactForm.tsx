@@ -22,7 +22,7 @@ const ContactForm = ({ selectedPackage, onClose }: ContactFormProps) => {
     email: '',
     phone: '',
     company: '',
-    message: '' // This field will now also be required
+    message: ''  
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -59,7 +59,7 @@ const ContactForm = ({ selectedPackage, onClose }: ContactFormProps) => {
       `Phone: ${phone}\n` +
       `Company: ${company || 'Not provided'}\n\n` +
       `*Message:*\n` +
-      `${message}\n\n` + // Message is now guaranteed to be filled
+      `${message}\n\n` +  
       `Please get back to me. Thank you!`
     );
 

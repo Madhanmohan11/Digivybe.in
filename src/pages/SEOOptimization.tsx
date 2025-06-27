@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Search, TrendingUp, Target, BarChart, Star, ArrowRight, ExternalLink } from 'lucide-react'; // Ensure ExternalLink is imported
+import { ArrowLeft, Check, Search, TrendingUp, Target, BarChart, Star, ArrowRight, ExternalLink } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 const SEOOptimization = () => {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
   const [hoveredPackage, setHoveredPackage] = useState<string | null>(null);
   const [showContactForm, setShowContactForm] = useState(false);
+ 
+  const readyToBoostRef = useRef<HTMLDivElement>(null);
+  const getFixedHeaderHeight = () => {
+    const headerElement = document.getElementById('digivybe-header');  
+    if (headerElement) {
+      return headerElement.offsetHeight;
+    }
+    return 80;  
+  };
+  // ------------------------------------------------------------------
 
   const services = [
     { icon: <Search className="w-6 h-6" />, title: "Keyword Research", description: "In-depth keyword analysis and strategy development" },
@@ -61,16 +71,39 @@ const SEOOptimization = () => {
     }
   };
 
-  // Function to scroll to the pricing section
+  
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing-section');
     if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: 'smooth' });
+      const headerHeight = getFixedHeaderHeight();
+      const elementPosition = pricingSection.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight - 20;  
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
+  
+  useEffect(() => {
+    if (selectedPackage && readyToBoostRef.current) {
+      const headerHeight = getFixedHeaderHeight();
+      const elementPosition = readyToBoostRef.current.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight - 20;  
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }, [selectedPackage]);  
+
   return (
+   
     <div className="min-h-screen pt-20">
+
       {/* Back Button */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link to="/services" className="inline-flex items-center text-violet-600 hover:text-violet-700 transition-colors">
@@ -94,7 +127,7 @@ const SEOOptimization = () => {
                 <Button
                   size="lg"
                   className="w-full sm:w-auto bg-white text-green-600 hover:bg-gray-100"
-                  onClick={scrollToPricing}
+                  onClick={scrollToPricing}  
                 >
                   Get SEO Audit
                 </Button>
@@ -211,6 +244,7 @@ const SEOOptimization = () => {
                         ? 'bg-green-600 hover:bg-green-700'
                         : `bg-gradient-to-r ${pkg.gradient} hover:opacity-90`
                     }`}
+                    onClick={() => handlePackageSelect(pkg.id)}
                   >
                     {selectedPackage === pkg.id ? (
                       <>
@@ -230,7 +264,10 @@ const SEOOptimization = () => {
           </div>
 
           {selectedPackage && (
-            <div className="mt-12 p-8 bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl border-2 border-green-200 text-center animate-fade-in">
+            <div
+              ref={readyToBoostRef}  
+              className="mt-12 p-8 bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl border-2 border-green-200 text-center animate-fade-in"
+            >
               <h3 className="text-2xl font-bold mb-4 text-green-800">Ready to Boost Your Rankings?</h3>
               <p className="text-gray-700 mb-6">
                 You've selected the **{packages.find(p => p.id === selectedPackage)?.name}** package.
@@ -246,7 +283,7 @@ const SEOOptimization = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - This is the section visible in your screenshot that was being cut off */}
       <section className="py-20 bg-gradient-to-r from-green-600 to-teal-600">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -255,12 +292,11 @@ const SEOOptimization = () => {
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Let's optimize your website for search engines and drive more organic traffic.
           </p>
-          {/* Updated button as per your request */}
           <Link to="/portfolio">
             <Button
               size="lg"
               variant="outline"
-              className="w-full sm:w-auto border-white text-green-600 hover:bg-white"  
+              className="w-full sm:w-auto border-white text-green-600 hover:bg-white"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
               View Our Work

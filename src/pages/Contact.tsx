@@ -166,7 +166,7 @@ const Contact = () => {
     },
     {
       title: "Innovation Hub",
-      description: "Thazhambur, Tamil Nadu, India (Remote-first Agency)", // Corrected address
+      description: "Thazhambur, Tamil Nadu, India (Remote-first Agency)",  
       icon: "🏢",
       gradient: "from-purple-600 to-pink-600"
     }

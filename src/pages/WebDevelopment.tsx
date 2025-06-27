@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Code, Smartphone, Globe, Zap, Star, ArrowRight, ExternalLink } from 'lucide-react';
+import {
+  ArrowLeft, Check, Code, Smartphone, Globe, Zap,
+  Star, ArrowRight, ExternalLink
+} from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 const WebDevelopment = () => {
@@ -21,19 +24,38 @@ const WebDevelopment = () => {
     {
       id: "basic",
       name: "Starter",
-      price: "₹25,000",
-      originalPrice: "₹35,000",
-      features: ["5 Pages Website", "Responsive Design", "Basic SEO", "Contact Form", "1 Month Support", "Mobile Optimized"],
+      price: "₹8999",
+      originalPrice: "₹10000",
+      features: [
+        "5 Pages Website", "Responsive Design", "Basic SEO", "Contact Form",
+        "2 Month Support", "Mobile Optimized", "WhatsApp Button Integration", "Social Media Integration"
+      ],
       gradient: "from-blue-500 to-purple-500",
       badge: "Best for Small Business",
       popular: false
     },
     {
+      id: "Startup",
+      name: "Startup",
+      price: "₹17999",
+      originalPrice: "₹25,000",
+      features: [
+        "5-15 Pages Website", "Responsive Design", "On Page SEO ", "Contact Form",
+        "5 Month Support", "Admin Access", "Inquiry Form", "WhatsApp Button Integration", "Social Media Integration"
+      ],
+      gradient: "from-green-500 to-yellow-500",
+      badge: "Best for Startup Business",
+      popular: false
+    },
+    {
       id: "professional",
       name: "Professional",
-      price: "₹65,000",
-      originalPrice: "₹85,000",
-      features: ["15 Pages Website", "Custom Design", "Advanced SEO", "CMS Integration", "E-commerce Ready", "6 Months Support", "Performance Optimization", "Analytics Setup"],
+      price: "₹35,000",
+      originalPrice: "₹65,000",
+      features: [
+        "20+ Pages Website", "Custom Design", "Advanced SEO", "E-commerce Ready",
+        "1 Year Support", "Performance Optimization", "Analytics Setup", "WhatsApp Button Integration", "Social Media Integration"
+      ],
       gradient: "from-purple-500 to-pink-500",
       badge: "Most Popular",
       popular: true
@@ -41,9 +63,11 @@ const WebDevelopment = () => {
     {
       id: "premium",
       name: "Enterprise",
-      price: "₹1,50,000",
-      originalPrice: "₹2,00,000",
-      features: ["Unlimited Pages", "Custom Functionality", "Advanced Integrations", "API Development", "Priority Support", "1 Year Maintenance", "Performance Monitoring", "Security Audits", "Custom Admin Panel"],
+      features: [
+        "Unlimited Pages", "Custom Functionality", "Advanced Integrations", "API Development",
+        "Priority Support", "1 Year Maintenance", "Performance Monitoring",
+        "Security Audits", "Custom Admin Panel", "WhatsApp Button Integration", "Social Media Integration"
+      ],
       gradient: "from-pink-500 to-red-500",
       badge: "Enterprise Solution",
       popular: false
@@ -52,6 +76,12 @@ const WebDevelopment = () => {
 
   const handlePackageSelect = (packageId: string) => {
     setSelectedPackage(packageId);
+    setTimeout(() => {
+      const section = document.getElementById('ready-section');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   const handleContactNow = () => {
@@ -61,7 +91,6 @@ const WebDevelopment = () => {
     }
   };
 
-  // Function to scroll to the pricing section
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing-section');
     if (pricingSection) {
@@ -88,33 +117,28 @@ const WebDevelopment = () => {
                 Web <span className="text-yellow-300">Development</span>
               </h1>
               <p className="text-lg sm:text-xl text-white/90 mb-8">
-                Create stunning, fast, and user-friendly websites that drive results. From simple landing pages to complex web applications.
+                Create stunning, fast, and user-friendly websites that drive results.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                {/* Changed Link to a Button with onClick for smooth scroll, added responsive width */}
-                <Button 
-                  size="lg" 
-                  className="bg-white text-blue-600 hover:bg-gray-100 w-full sm:w-auto"
-                  onClick={scrollToPricing} 
-                >
-                  Get Started
-                </Button>
-              </div>
+              <Button
+                size="lg"
+                className="bg-white text-blue-600 hover:bg-gray-100 w-full sm:w-auto"
+                onClick={scrollToPricing}
+              >
+                Get Started
+              </Button>
             </div>
             <div className="text-center">
-              <div className="mb-4 flex justify-center">
-                <video
-                  src="/assets/web-ills.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls={false}
-                  disablePictureInPicture
-                  controlsList="nodownload nofullscreen noremoteplayback"
-                  className="w-50 h-60 rounded-xl shadow-lg object-cover"
-                />
-              </div>
+              <video
+                src="/assets/web-ills.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls={false}
+                disablePictureInPicture
+                controlsList="nodownload nofullscreen noremoteplayback"
+                className="w-50 h-60 rounded-xl shadow-lg object-cover"
+              />
             </div>
           </div>
         </div>
@@ -143,7 +167,7 @@ const WebDevelopment = () => {
         </div>
       </section>
 
-      {/* Interactive Pricing Section - ADDED ID HERE */}
+      {/* Pricing Section */}
       <section id="pricing-section" className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -154,15 +178,14 @@ const WebDevelopment = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg) => (
-              <Card 
-                key={pkg.id} 
+              <Card
+                key={pkg.id}
                 className={`relative overflow-hidden cursor-pointer transition-all duration-300 transform ${
                   pkg.popular ? 'ring-2 ring-purple-600 scale-105' : ''
                 } ${
-                  selectedPackage === pkg.id ? 'ring-4 ring-blue-500 scale-105 shadow-2xl' : 
+                  selectedPackage === pkg.id ? 'ring-4 ring-blue-500 scale-105 shadow-2xl' :
                   hoveredPackage === pkg.id ? 'scale-102 shadow-lg' : ''
                 }`}
-                onClick={() => handlePackageSelect(pkg.id)}
                 onMouseEnter={() => setHoveredPackage(pkg.id)}
                 onMouseLeave={() => setHoveredPackage(null)}
               >
@@ -178,7 +201,7 @@ const WebDevelopment = () => {
                   </div>
                 )}
                 <CardContent className="p-8 pt-12">
-                  <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-r ${pkg.gradient} rounded-full flex items-center justify-center text-white text-2xl transition-transform duration-300 ${hoveredPackage === pkg.id ? 'scale-110' : ''}`}>
+                  <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-r ${pkg.gradient} rounded-full flex items-center justify-center text-white text-2xl ${hoveredPackage === pkg.id ? 'scale-110' : ''}`}>
                     💻
                   </div>
                   <h3 className="text-2xl font-bold text-center mb-2">{pkg.name}</h3>
@@ -197,10 +220,11 @@ const WebDevelopment = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button 
+                  <Button
+                    onClick={() => handlePackageSelect(pkg.id)}
                     className={`w-full transition-all duration-300 ${
-                      selectedPackage === pkg.id 
-                        ? 'bg-green-600 hover:bg-green-700' 
+                      selectedPackage === pkg.id
+                        ? 'bg-green-600 hover:bg-green-700'
                         : `bg-gradient-to-r ${pkg.gradient} hover:opacity-90`
                     }`}
                   >
@@ -220,12 +244,16 @@ const WebDevelopment = () => {
               </Card>
             ))}
           </div>
-          
+
+          {/* Ready to Get Started Section */}
           {selectedPackage && (
-            <div className="mt-12 p-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-200 text-center animate-fade-in">
+            <div
+              id="ready-section"
+              className="scroll-mt-32 mt-12 p-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-200 text-center animate-fade-in"
+            >
               <h3 className="text-2xl font-bold mb-4 text-blue-800">Ready to Get Started?</h3>
               <p className="text-gray-700 mb-6">
-                You've selected the <strong>{packages.find(p => p.id === selectedPackage)?.name}</strong> package. 
+                You've selected the <strong>{packages.find(p => p.id === selectedPackage)?.name}</strong> package.
                 Let's discuss your project requirements and get started!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -238,7 +266,7 @@ const WebDevelopment = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -249,10 +277,10 @@ const WebDevelopment = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/portfolio">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-white text-blue-600 hover:bg-white w-full sm:w-auto" // Added responsive width
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-blue-600 hover:bg-white w-full sm:w-auto"
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
                 View Our Work
