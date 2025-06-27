@@ -42,17 +42,17 @@ const Portfolio = () => {
       codeUrl: "#",
       featured: true
     },
-    {
-      id: 4,
-      title: "Travel Blog",
-      category: "wordpress",
-      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop",
-      description: "WordPress travel blog with custom theme, SEO optimization, and social media integration.",
-      technologies: ["WordPress", "PHP", "MySQL", "Custom Theme"],
-      liveUrl: "https://travel-blog-demo.wordpress.com",
-      codeUrl: "https://github.com/example/travel-blog-theme",
-      featured: false
-    },
+    // {
+    //   id: 4,
+    //   title: "Travel Blog",
+    //   category: "wordpress",
+    //   image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop",
+    //   description: "WordPress travel blog with custom theme, SEO optimization, and social media integration.",
+    //   technologies: ["WordPress", "PHP", "MySQL", "Custom Theme"],
+    //   liveUrl: "https://travel-blog-demo.wordpress.com",
+    //   codeUrl: "https://github.com/example/travel-blog-theme",
+    //   featured: false
+    // },
     {
       id: 5,
       title: "Corporate Video Campaign",
@@ -94,7 +94,7 @@ const Portfolio = () => {
     { id: 'web-development', name: 'Web Development', count: projects.filter(p => p.category === 'web-development').length },
     { id: 'ecommerce', name: 'E-commerce', count: projects.filter(p => p.category === 'ecommerce').length },
     { id: 'logo-design', name: 'Logo Design', count: projects.filter(p => p.category === 'logo-design').length },
-    { id: 'wordpress', name: 'WordPress', count: projects.filter(p => p.category === 'wordpress').length },
+    // { id: 'wordpress', name: 'WordPress', count: projects.filter(p => p.category === 'wordpress').length },
     { id: 'photo-video', name: 'Photo & Video', count: projects.filter(p => p.category === 'photo-video').length },
     { id: 'seo', name: 'SEO', count: projects.filter(p => p.category === 'seo').length }
   ];
