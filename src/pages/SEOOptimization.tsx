@@ -31,8 +31,8 @@ const SEOOptimization = () => {
     {
       id: "starter",
       name: "Starter SEO",
-      price: "₹15,000",
-      originalPrice: "₹25,000",
+      price: "₹2999",
+      originalPrice: "From",
       features: ["Keyword research", "On-page optimization", "Meta tag optimization", "Basic reporting", "1 month support", "Google Analytics Setup"],
       gradient: "from-green-500 to-teal-500",
       badge: "Great for New Websites",
@@ -41,8 +41,8 @@ const SEOOptimization = () => {
     {
       id: "professional",
       name: "Professional SEO",
-      price: "₹35,000",
-      originalPrice: "₹50,000",
+      price: "₹6999",
+      originalPrice: "From",
       features: ["Advanced keyword strategy", "Technical SEO audit", "Content optimization", "Link building", "Monthly reports", "3 months support", "Local SEO", "Competitor Analysis"],
       gradient: "from-teal-500 to-blue-500",
       badge: "Most Popular",
@@ -51,8 +51,8 @@ const SEOOptimization = () => {
     {
       id: "enterprise",
       name: "Enterprise SEO",
-      price: "₹75,000",
-      originalPrice: "₹1,00,000",
+      price: "₹15999",
+      originalPrice: "From",
       features: ["Comprehensive SEO strategy", "Advanced competitor analysis", "Advanced analytics", "24/7 monitoring", "Dedicated SEO manager", "6 months support", "E-commerce SEO", "Schema Markup"],
       gradient: "from-blue-500 to-indigo-500",
       badge: "Enterprise Solution",
@@ -225,8 +225,8 @@ const SEOOptimization = () => {
                   <h3 className="text-2xl font-bold text-center mb-2">{pkg.name}</h3>
                   <div className="text-center mb-6">
                     <div className="flex items-center justify-center gap-2">
-                      <span className="text-lg text-gray-400 line-through">{pkg.originalPrice}</span>
-                      <span className="text-4xl font-bold text-green-600">{pkg.price}</span>
+                      <span className="text-2xl font-bold text-red-600">{pkg.originalPrice}</span>
+                      <span className="text-3xl font-bold text-green-600">{pkg.price}</span>
                     </div>
                     <span className="text-gray-600 text-sm">Per month</span>
                   </div>

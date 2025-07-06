@@ -27,25 +27,25 @@ const WebDevelopment = () => {
       price: "₹8999",
       originalPrice: "₹10000",
       features: [
-        "5 Pages Website", "Responsive Design", "Basic SEO", "Contact Form",
-        "2 Month Support", "Mobile Optimized", "WhatsApp Button Integration", "Social Media Integration"
+        "5 Pages Website (Home, About, Service, Contact, WhatsApp)","Free Domain & Hosting (1 Year)", "Responsive Design", "Basic SEO (Google friendly)", "Contact Form",
+        "2 Month Support", "Mobile & Desktop Friendly", "WhatsApp Button Integration", "Social Media Integration", "Fast Delivery (5 Days)"
       ],
       gradient: "from-blue-500 to-purple-500",
-      badge: "Best for Small Business",
+      badge: "Best for Startup Business",
       popular: false
     },
     {
       id: "Startup",
-      name: "Startup",
+      name: "Growth",
       price: "₹17999",
       originalPrice: "₹25,000",
       features: [
-        "5-15 Pages Website", "Responsive Design", "On Page SEO ", "Contact Form",
-        "5 Month Support", "Admin Access", "Inquiry Form", "WhatsApp Button Integration", "Social Media Integration"
+        "5-10 Pages Website","Free Domain & Hosting (1 Year)", "Responsive Design", "On Page SEO ", "Contact Form",
+        "5 Month Support", "Admin Access", "Inquiry Form", "WhatsApp Button Integration","Mobile & Desktop Friendly", "Social Media Integration"
       ],
       gradient: "from-green-500 to-yellow-500",
-      badge: "Best for Startup Business",
-      popular: false
+      badge: "Most Popular", 
+      popular: true
     },
     {
       id: "professional",
@@ -53,12 +53,12 @@ const WebDevelopment = () => {
       price: "₹35,000",
       originalPrice: "₹65,000",
       features: [
-        "20+ Pages Website", "Custom Design", "Advanced SEO", "E-commerce Ready",
-        "1 Year Support", "Performance Optimization", "Analytics Setup", "WhatsApp Button Integration", "Social Media Integration"
+        "15+ Pages Website","Free Domain & Hosting (1 Year)", "Custom Design", "Advanced SEO", "E-commerce Ready",
+        "1 Year Support", "Performance Optimization", "Analytics Setup", "WhatsApp Button Integration","Mobile & Desktop Friendly", "Social Media Integration"
       ],
       gradient: "from-purple-500 to-pink-500",
-      badge: "Most Popular",
-      popular: true
+      badge: "Best for Pro Business",
+      popular: false
     },
     {
       id: "premium",
@@ -176,7 +176,7 @@ const WebDevelopment = () => {
               Select the ideal web development package for your business needs and budget.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {packages.map((pkg) => (
               <Card
                 key={pkg.id}

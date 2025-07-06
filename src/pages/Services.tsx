@@ -41,14 +41,14 @@ const Services = () => {
     //   gradient: "from-blue-600 to-cyan-600",
     //   route: "/services/ecommerce-development"
     // },
-    {
-      title: "Photos and Video Editing",
-      description: "Professional photo and video editing services that bring your visual content to life with stunning effects, color correction, and creative enhancements.",
-      icon: "📸",
-      features: ["Color Correction", "Visual Effects", "Professional Editing", "Creative Enhancement"],
-      gradient: "from-purple-600 to-pink-600",
-      route: "/services/photo-video-editing"
-    },
+    // {
+    //   title: "Photos and Video Editing",
+    //   description: "Professional photo and video editing services that bring your visual content to life with stunning effects, color correction, and creative enhancements.",
+    //   icon: "📸",
+    //   features: ["Color Correction", "Visual Effects", "Professional Editing", "Creative Enhancement"],
+    //   gradient: "from-purple-600 to-pink-600",
+    //   route: "/services/photo-video-editing"
+    // },
     {
       title: "SEO Optimizing",
       description: "Comprehensive SEO strategies that improve your search engine rankings, increase organic traffic, and boost your online visibility.",
@@ -92,7 +92,7 @@ const Services = () => {
       {/* Services Grid */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <Card 
                 key={service.title}
