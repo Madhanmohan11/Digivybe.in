@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -7,6 +6,11 @@ import { ArrowLeft, ExternalLink, Eye, Code, Star, Filter } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const allProjectsRef = useRef(null);
+
+  const scrollToProjects = () => {
+    allProjectsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const projects = [
     {
@@ -42,17 +46,6 @@ const Portfolio = () => {
       codeUrl: "#",
       featured: true
     },
-    // {
-    //   id: 4,
-    //   title: "Travel Blog",
-    //   category: "wordpress",
-    //   image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop",
-    //   description: "WordPress travel blog with custom theme, SEO optimization, and social media integration.",
-    //   technologies: ["WordPress", "PHP", "MySQL", "Custom Theme"],
-    //   liveUrl: "https://travel-blog-demo.wordpress.com",
-    //   codeUrl: "https://github.com/example/travel-blog-theme",
-    //   featured: false
-    // },
     {
       id: 5,
       title: "Corporate Video Campaign",
@@ -74,8 +67,7 @@ const Portfolio = () => {
       liveUrl: "https://local-business-example.com",
       codeUrl: "#",
       featured: false
-    }
-    ,
+    },
     {
       id: 7,
       title: "Madras Villa Resort Booking Website",
@@ -94,8 +86,6 @@ const Portfolio = () => {
     { id: 'web-development', name: 'Web Development', count: projects.filter(p => p.category === 'web-development').length },
     { id: 'ecommerce', name: 'E-commerce', count: projects.filter(p => p.category === 'ecommerce').length },
     { id: 'logo-design', name: 'Logo Design', count: projects.filter(p => p.category === 'logo-design').length },
-    // { id: 'wordpress', name: 'WordPress', count: projects.filter(p => p.category === 'wordpress').length },
-    { id: 'photo-video', name: 'Photo & Video', count: projects.filter(p => p.category === 'photo-video').length },
     { id: 'seo', name: 'SEO', count: projects.filter(p => p.category === 'seo').length }
   ];
 
@@ -125,22 +115,23 @@ const Portfolio = () => {
             Explore our successful projects across web development, e-commerce, design, and digital marketing. 
             See how we've helped businesses grow with our creative solutions.
           </p>
-         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button
-          size="lg"
-          className="w-full sm:w-auto bg-white text-violet-600 hover:bg-gray-100"
-        >
-          View All Projects
-        </Button>
-        <Link to="/contact" className="w-full sm:w-auto">
-          <Button
-            size="lg"
-            className="w-full sm:w-auto bg-white text-violet-600 hover:bg-gray-100"
-          >
-            Contact Us
-          </Button>
-        </Link>
-      </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              onClick={scrollToProjects}
+              className="w-full sm:w-auto bg-white text-violet-600 hover:bg-gray-100"
+            >
+              View All Projects
+            </Button>
+            <Link to="/contact" className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                className="w-full sm:w-auto bg-white text-violet-600 hover:bg-gray-100"
+              >
+                Contact Us
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -200,7 +191,7 @@ const Portfolio = () => {
       </section>
 
       {/* All Projects with Filter */}
-      <section className="py-20 bg-white">
+      <section ref={allProjectsRef} className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">All Projects</h2>
