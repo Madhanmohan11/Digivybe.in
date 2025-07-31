@@ -160,13 +160,13 @@ const Contact = () => {
     },
     {
       title: "Real-Time Connect",
-      description: "+91 93630 19747", // Corrected phone number
+      description: "+91 8680996316", // Corrected phone number
       icon: "⚡",
       gradient: "from-blue-600 to-cyan-600"
     },
     {
       title: "Innovation Hub",
-      description: "Thazhambur, Tamil Nadu, India (Remote-first Agency)",  
+      description: "Chennai, Tamil Nadu, India (Remote-first Agency)",  
       icon: "🏢",
       gradient: "from-purple-600 to-pink-600"
     }
