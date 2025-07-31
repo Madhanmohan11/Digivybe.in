@@ -63,7 +63,7 @@ const ContactForm = ({ selectedPackage, onClose }: ContactFormProps) => {
       `Please get back to me. Thank you!`
     );
 
-    const whatsappUrl = `https://wa.me/919150387980?text=${whatsappMessage}`;
+    const whatsappUrl = `https://wa.me/918680996316?text=${whatsappMessage}`;
 
     try {
       window.open(whatsappUrl, '_blank');
@@ -148,7 +148,7 @@ const ContactForm = ({ selectedPackage, onClose }: ContactFormProps) => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  placeholder="+91 9150387980"
+                  placeholder="+91 9563257846"
                 />
               </div>
               <div>
